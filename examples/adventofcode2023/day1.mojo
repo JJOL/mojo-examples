@@ -1,5 +1,6 @@
 """
 day1.mojo
+Mojo Version: 24.1.0
 @description: Advent of Code 2024 - Day 1 Challenge in Mojo. Find the value for each string.
 There are two parts in this challenge implemented in two functions: get_calibr_value_p1 and get_calibr_value_p2.
 """
@@ -91,6 +92,7 @@ fn get_calibr_value_p2(lines: DynamicVector[String]) -> Int:
     return acc    
 
 fn main():
+    print("Advent of Code 2023 - Day 1 Challenge")
     # Initialize "constant" digit string representations array
     STR_DIGITS.append("zero")
     STR_DIGITS.append("one")
@@ -104,8 +106,8 @@ fn main():
     STR_DIGITS.append("nine")
 
     try:
-        # var file = open("1.in1.txt", "r")
-        var file = open("1.in2.txt", "r")
+        # var file = open("day1.in1.txt", "r")
+        var file = open("day1.in2.txt", "r")
         var content = file.read()
 
         var lines = content.split("\n")
