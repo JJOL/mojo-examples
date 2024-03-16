@@ -1,10 +1,12 @@
 """
 day1.mojo
 Mojo Version: 24.1.0
-@description: Advent of Code 2024 - Day 1 Challenge in Mojo. Find the value for each string.
-There are two parts in this challenge implemented in two functions: get_calibr_value_p1 and get_calibr_value_p2.
+@description: Advent of Code 2024 - Day 2 Challenge in Mojo. Find valid games and calculate the power value for each game minimum items subset .
+There are two parts in this challenge implemented in two functions: get_valid_games_p1 and get_games_min_power_value_p2.
+Mojo Concepts:
+- raises error forwarding
+- DynamicVector push and pop operations
 """
-
 
 fn get_valid_games_p1(lines: DynamicVector[String], t_red: Int, t_blue: Int, t_green: Int) raises -> DynamicVector[Int]:
     """

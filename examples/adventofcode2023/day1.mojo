@@ -3,6 +3,16 @@ day1.mojo
 Mojo Version: 24.1.0
 @description: Advent of Code 2024 - Day 1 Challenge in Mojo. Find the value for each string.
 There are two parts in this challenge implemented in two functions: get_calibr_value_p1 and get_calibr_value_p2.
+
+Mojo Concepts:
+- Functions
+- Files
+- String manipulation
+- DynamicVector (Dynamic heap memory array)
+- Iterating over a collections and strings
+- inout parameters
+- try/except error handling
+- for loop item dereferencing []
 """
 
 # Note: I wanted to use a stack memory based structure like a Buffer, but afaik Buffer only with primitive register types
