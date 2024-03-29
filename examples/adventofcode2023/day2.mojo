@@ -1,14 +1,14 @@
 """
 day1.mojo
-Mojo Version: 24.1.0
+Mojo Version: 24.2.0
 @description: Advent of Code 2024 - Day 2 Challenge in Mojo. Find valid games and calculate the power value for each game minimum items subset .
 There are two parts in this challenge implemented in two functions: get_valid_games_p1 and get_games_min_power_value_p2.
 Mojo Concepts:
 - raises error forwarding
-- DynamicVector push and pop operations
+- List push and pop operations
 """
 
-fn get_valid_games_p1(lines: DynamicVector[String], t_red: Int, t_blue: Int, t_green: Int) raises -> DynamicVector[Int]:
+fn get_valid_games_p1(lines: List[String], t_red: Int, t_blue: Int, t_green: Int) raises -> List[Int]:
     """
     Get_valid_games_p1 function receives a list of strings and three integers. The function returns a list of integers.
     @param lines: A list of strings with the game information.
@@ -18,7 +18,7 @@ fn get_valid_games_p1(lines: DynamicVector[String], t_red: Int, t_blue: Int, t_g
     @return: A list of game ids that are valid.
     See https://adventofcode.com/2023/day/2 for more information.
     """
-    var games = DynamicVector[Int]()
+    var games = List[Int]()
 
     # Line Example "Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green"
     for line in lines:
@@ -49,19 +49,19 @@ fn get_valid_games_p1(lines: DynamicVector[String], t_red: Int, t_blue: Int, t_g
                 break
 
         if is_valid:
-            games.push_back(game_id)
+            games.append(game_id)
                     
     return games
 
 
-fn get_games_min_power_value_p2(lines: DynamicVector[String]) raises -> DynamicVector[Int]:
+fn get_games_min_power_value_p2(lines: List[String]) raises -> List[Int]:
     """
     Get_games_min_power_value_p2 function receives a list of strings. The function returns a list of integers.
     @param lines: A list of strings with the game information.
     @return: A list of integers with the power value for each game minimum subset.
     See https://adventofcode.com/2023/day/2 for more information.
     """
-    var power_values = DynamicVector[Int]()
+    var power_values = List[Int]()
 
     for line in lines:
         var min_red = 0
@@ -86,7 +86,7 @@ fn get_games_min_power_value_p2(lines: DynamicVector[String]) raises -> DynamicV
                     min_green = count
 
         # print(min_red, min_blue, min_green)
-        power_values.push_back(min_red*min_blue*min_green)
+        power_values.append(min_red*min_blue*min_green)
     
     return power_values
 
@@ -104,8 +104,8 @@ fn main() raises:
         if len(lines[len(lines)-1]) == 0:
             _ = lines.pop_back()
         
-        # var results = get_valid_games_p1(lines, t_red, t_blue, t_green)
-        var results = get_games_min_power_value_p2(lines)
+        var results = get_valid_games_p1(lines, t_red, t_blue, t_green)
+        # var results = get_games_min_power_value_p2(lines)
 
         # get the sum of games items
         var sum = 0
