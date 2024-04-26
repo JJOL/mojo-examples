@@ -4,7 +4,7 @@ Mojo Version: 24.1.0
 @description: Advent of Code 2024 - Day 3 Challenge in Mojo. Parse engine schematics for parts and gears to calculate their values.
 There are two parts in this challenge implemented in two functions: PartsInfo::engine_parts_value() and PartsInfo::engine_gears_ratio_value.
 Both of these GearInfo functions greatly depend on parsing the input with PartsInfo::from_schematic().
-See https://adventofcode.com/2023/day/2 for more information.
+See https://adventofcode.com/2023/day/3 for more information.
 
 Mojo Concepts:
 - Structs
@@ -267,6 +267,25 @@ fn main() raises:
         file_name = argv[1]
     else:
         file_name = "day3.in1.txt"
+
+    # Super Fast in memory string parsing for testing
+    # var file_content = String("""467..114..
+# ...*......
+# ..35..633.
+# ......#...
+# 617*......
+# .....+.58.
+# ..592.....
+# ......755.
+# ...$.*....
+# .664.598..""")
+#     var lines = file_content.split("\n")
+#     var parts_info = PartsInfo.from_schematic(lines)
+#     var final_value = parts_info.engine_parts_value()
+#     print("Final Parts value: ", str(final_value))
+#     var gear_ratio_value = parts_info.engine_gears_ratio_value()
+#     print("Gear ratio value: ", str(gear_ratio_value))
+
 
     with open(file_name, "r") as file:
         var content = file.read()
