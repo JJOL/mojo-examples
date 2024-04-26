@@ -1,6 +1,6 @@
 """
 day3.mojo
-Mojo Version: 24.1.0
+Mojo Version: 24.2.0
 @description: Advent of Code 2024 - Day 3 Challenge in Mojo. Parse engine schematics for parts and gears to calculate their values.
 There are two parts in this challenge implemented in two functions: PartsInfo::engine_parts_value() and PartsInfo::engine_gears_ratio_value.
 Both of these GearInfo functions greatly depend on parsing the input with PartsInfo::from_schematic().
@@ -23,7 +23,7 @@ alias NULL_PART = -1
 fn is_symbol(c: String) -> Bool:
     return not isdigit(c._buffer[0]) and c != '.'
 
-fn count_neighbours(lines: DynamicVector[String], x: Int, y: Int, test_fn: fn(String)->Bool) -> Int:
+fn count_neighbours(lines: List[String], x: Int, y: Int, test_fn: fn(String)->Bool) -> Int:
     """
     Count the number of adjacent neighbours to location x,y (max 8) that satisfy the test function.
     """
@@ -56,14 +56,14 @@ fn count_neighbours(lines: DynamicVector[String], x: Int, y: Int, test_fn: fn(St
                 neighbours += 1
     return neighbours
 
-fn has_symbol_neighbours(lines: DynamicVector[String], x: Int, y: Int) -> Bool:
+fn has_symbol_neighbours(lines: List[String], x: Int, y: Int) -> Bool:
     """
     Check if the location x,y has any adjacent neighbours that are symbols (not digits or '.').
     """
     var neighbours = count_neighbours(lines, x, y, is_symbol) # is_symbol is a function pointer that checks if a string is a symbol
     return neighbours > 0
 
-fn has_element(list: DynamicVector[Int], element: Int) -> Bool:
+fn has_element(list: List[Int], element: Int) -> Bool:
     """
     Check if the list contains the element.
     """
@@ -88,9 +88,9 @@ struct GearInfo(CollectionElement):
 
 
 struct PartsInfo:
-    var part_values: DynamicVector[Int]
+    var part_values: List[Int]
     var part_locations: DTypePointer[DType.int32]
-    var gears: DynamicVector[GearInfo]
+    var gears: List[GearInfo]
     var height: Int
     var width: Int
 
@@ -101,9 +101,9 @@ struct PartsInfo:
         for i in range(height * width):
             self.part_locations[i] = NULL_PART
 
-        self.part_values = DynamicVector[Int]()
+        self.part_values = List[Int]()
 
-        self.gears = DynamicVector[GearInfo]()
+        self.gears = List[GearInfo]()
 
     fn __moveinit__(inout self, owned other: Self):
         """
@@ -166,11 +166,11 @@ struct PartsInfo:
                 total_value += gear[].gear_ratio
         return total_value
 
-    fn find_neighbour_parts(self, x: Int, y: Int) -> DynamicVector[Int]:
+    fn find_neighbour_parts(self, x: Int, y: Int) -> List[Int]:
         """
         Find the unique parts (values) within the 8 neighbours of location x,y.
         """
-        var all_neighbour_parts = DynamicVector[Int]()
+        var all_neighbour_parts = List[Int]()
 
         # Check 8 neighbours to see what part values are there
         all_neighbour_parts.append(self.get_part_value_at(x - 1, y - 1))
@@ -183,7 +183,7 @@ struct PartsInfo:
         all_neighbour_parts.append(self.get_part_value_at(x + 1, y + 1))
 
         # Remove the NULL_PART parts and duplicates to get unique part values
-        var unique_neighbour_parts = DynamicVector[Int]()
+        var unique_neighbour_parts = List[Int]()
         for part in all_neighbour_parts:
             if part[] != NULL_PART and not has_element(unique_neighbour_parts, part[]):
                 unique_neighbour_parts.append(part[])
@@ -205,7 +205,7 @@ struct PartsInfo:
             
 
     @staticmethod
-    fn from_schematic(lines: DynamicVector[String]) raises -> PartsInfo:
+    fn from_schematic(lines: List[String]) raises -> PartsInfo:
         """
         Parse the engine schematic from the input lines and create a PartsInfo instance with parts and gears.
         """

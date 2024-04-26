@@ -1,6 +1,6 @@
 """
 day1.mojo
-Mojo Version: 24.1.0
+Mojo Version: 24.2.0
 @description: Advent of Code 2024 - Day 1 Challenge in Mojo. Find the value for each string.
 There are two parts in this challenge implemented in two functions: get_calibr_value_p1 and get_calibr_value_p2.
 
@@ -8,7 +8,7 @@ Mojo Concepts:
 - Functions
 - Files
 - String manipulation
-- DynamicVector (Dynamic heap memory array)
+- List (Dynamic heap memory array)
 - Iterating over a collections and strings
 - inout parameters
 - try/except error handling
@@ -18,9 +18,9 @@ Mojo Concepts:
 # Note: I wanted to use a stack memory based structure like a Buffer, but afaik Buffer only with primitive register types
 # and i didnt want to implement string "startswith" functions manually.
 # So, I used a DynamicVector and initialized in main()
-var STR_DIGITS: DynamicVector[String] = DynamicVector[String]()
+var STR_DIGITS: List[String] = List[String]()
 
-fn get_calibr_value_p1(lines: DynamicVector[String]) -> Int:
+fn get_calibr_value_p1(lines: List[String]) -> Int:
     """
     Get_calibr_value - Get the callibration value for each document.
     :param lines: DynamicVector[String] - The lines of the document
@@ -63,10 +63,10 @@ fn is_digit(char_str: String, inout digit_val: Int) -> Bool:
         digit_val = -1
         return False
         
-fn get_calibr_value_p2(lines: DynamicVector[String]) -> Int:
+fn get_calibr_value_p2(lines: List[String]) -> Int:
     """
     Get_calibr_value_p2 - Get the callibration value for each document parsing digit string representations too.
-    :param lines: DynamicVector[String] - The lines of the document
+    :param lines: List[String] - The lines of the document
     :return: Int - The callibration value
     See https://adventofcode.com/2023/day/1 for more information.
     """
