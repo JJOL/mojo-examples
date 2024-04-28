@@ -3,6 +3,12 @@ from collections import Optional
 import random
 import sys
 
+struct MutRef[T: AnyType]:
+    alias Type = Reference[T, __mlir_attr.`1: i1`]
+
+struct Ref[T: AnyType]:
+    alias Type = Reference[T, __mlir_attr.`0: i1`]
+
 struct Queue[T: CollectionElement](Sized):
     var arena: List[T]
     var head: Int
@@ -76,6 +82,9 @@ trait IProcess(CollectionElement):
         ...
 
     fn run(self, time: Int) -> Int:
+        ...
+
+    fn make_happy[T: AnyType](inout self, value: T):
         ...
 
 @value
@@ -233,7 +242,7 @@ fn main() raises:
     var data = AnyPointer[MyObject].alloc(1)
     data.emplace_value(o^)
 
-    w.spawn(&o)
+    # w.spawn(&o)
 
     fn run_process(process: SimEnv.TProcess, time: Int) raises -> Int:
         if process.isa[VesselSpawner]():
