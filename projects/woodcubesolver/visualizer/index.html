@@ -1,0 +1,51 @@
+<html lang="en"></html>
+<head>
+    <meta charset="UTF-8">
+    <title>3D Linkage Visualization</title>
+    <style>
+        body { margin: 0; overflow: hidden; cursor: crosshair;}
+        canvas { display: block; }
+        #info-gui {
+          position: absolute;
+          top: 0;
+          left: 0;
+          padding: 20px;
+          z-index: 10;
+        }
+
+        #info-gui:hover {
+          cursor: auto;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script type="importmap">
+        {
+          "imports": {
+            "three": "https://cdn.jsdelivr.net/npm/three@0.139.0/build/three.module.js",
+            "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.139.0/examples/jsm/"
+          }
+        }
+      </script>
+</head>
+<body>
+  <script>
+    window.solutionFile = 'start.txt'
+  </script>
+    <script type="module" src="script.js"></script>
+    <div id="info-gui">
+      <h3>Snake Cube Puzzle</h3>
+      <span>Solution: <span id="solution-label"></span></span>
+      <br>
+      <span>Volume: <span id="volume-label"></span></span>
+
+      <div>
+        <button id="clear-btn">Clear</button>
+        <button id="prev-btn">&lt;</button>
+        <span id="actual-index-label">1</span>
+        <button id="next-btn">&gt;</button>
+        <button id="full-btn">Full</button>
+      </div>
+    </div>
+</body>
+</html>

@@ -97,7 +97,21 @@ fn pos_coord(pos: SIMD[DType.int8, 4]) -> String:
     return "(" + str(pos[0]) + "," + str(pos[1]) + "," + str(pos[2]) + ")"
 
 fn main():
+    var argv = sys.argv()
+    var output_file: String = "solution.txt"
+    var target_vol: Int = MIN_VOL
+    if len(argv) > 1:
+        output_file = argv[1]
+    if len(argv) > 2:
+        try:
+            target_vol = atol(str(argv[2]))
+        except:
+            print("Invalid target volume")
+            sys.exit()
+    print(sys.argv()[1])
+    print("Output file:")
     print("Num of workers:", W)
+
 
     var g_min_volumes = SIMD[DType.int16, W](0)
     var g_best_solutions = SIMD[DType.uint32, W](0)
@@ -153,7 +167,7 @@ fn main():
                 best_sol = s
                 print("WID (" + str(w_idx) + ") min_vol: ", min_vol)
 
-                if min_vol <= MIN_VOL:
+                if min_vol <= target_vol:
                     found = True
                     break
 
@@ -182,7 +196,7 @@ fn main():
         print("cubes[", i, "]: ", g_cubes.load[width=4](g_index*4))
 
     try:
-        with open("best_solution.txt", "w") as f:
+        with open(output_file, "w") as f:
             f.write("Best solution: " + str(g_best_solutions[index_of_min]) + "\n")
             f.write("min_vol: " + str(g_min_volumes[index_of_min]) + "\n")
             for i in range(N):
